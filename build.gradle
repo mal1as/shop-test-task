@@ -21,6 +21,9 @@ dependencies {
 
     implementation 'org.postgresql:postgresql'
     implementation 'org.flywaydb:flyway-core'
+    implementation 'jakarta.validation:jakarta.validation-api'
+
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:$springDocVersion"
 
     implementation "org.mapstruct:mapstruct:$mapStructVersion"
     compileOnly('org.projectlombok:lombok')
