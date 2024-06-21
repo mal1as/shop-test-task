@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,7 +38,7 @@ public class ShopController {
             }
     )
     @PostMapping("/calculate-price")
-    public ResponseEntity<SuccessResponse<PriceResponse>> calculatePrice(@RequestBody PriceRequest priceRequest) {
+    public ResponseEntity<SuccessResponse<PriceResponse>> calculatePrice(@Valid @RequestBody PriceRequest priceRequest) {
         return ResponseEntity.ok(SuccessResponse.<PriceResponse>builder()
                 .content(PriceResponse.builder()
                         .price(priceService.calculatePrice(priceRequest))
@@ -57,7 +58,7 @@ public class ShopController {
             }
     )
     @PostMapping("/purchase")
-    public ResponseEntity<SuccessResponse<?>> makePurchase(@RequestBody PurchaseRequest purchaseRequest) {
+    public ResponseEntity<SuccessResponse<?>> makePurchase(@Valid @RequestBody PurchaseRequest purchaseRequest) {
         purchaseService.makePurchase(purchaseRequest);
         return ResponseEntity.ok(SuccessResponse.builder().build());
     }

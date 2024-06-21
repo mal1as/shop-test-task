@@ -11,6 +11,6 @@ import lombok.Setter;
 public class PurchaseRequest extends PriceRequest {
 
     @Schema(description = "Payment processor name")
-    @NotNull
+    @NotNull(message = "Payment processor must be not null")
     private String paymentProcessor;
 }

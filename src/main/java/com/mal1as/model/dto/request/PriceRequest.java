@@ -11,11 +11,11 @@ import lombok.Setter;
 public class PriceRequest {
 
     @Schema(description = "Product id")
-    @NotNull
+    @NotNull(message = "Product must be not null")
     private Long product;
 
     @Schema(description = "Tax number")
-    @NotNull
+    @NotNull(message = "Tax number must be not null")
     private String taxNumber;
 
     @Schema(description = "Coupon code for discount")
