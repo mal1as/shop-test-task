@@ -6,7 +6,17 @@ create table if not exists product (
 
 create table if not exists coupon (
     id bigserial primary key,
-    code varchar(8) not null unique,
+    type varchar(16) not null,
+    code varchar(8) not null unique
+);
+
+create table if not exists coupon_fixed (
+    coupon_id bigint not null references coupon,
+    sum integer not null check ( sum > 0 )
+);
+
+create table if not exists coupon_percent (
+    coupon_id bigint not null references coupon,
     percent integer not null check ( percent > 0 and percent <= 100)
 );
 

@@ -18,13 +18,17 @@ public class PriceService {
     public Double calculatePrice(PriceRequest priceRequest) {
         final Double productPrice = productService.findById(priceRequest.getProduct()).getPrice();
         final Integer taxPercent = taxService.findByNumber(priceRequest.getTaxNumber()).getPercent();
-        final Integer discountPercent = priceRequest.getCouponCode() == null ? 0 :
-                couponService.findByCode(priceRequest.getCouponCode()).getPercent();
-        return calculatePrice(productPrice, taxPercent, discountPercent);
+
+        final Double priceWithDiscount = calculatePriceWithDiscount(productPrice, priceRequest.getCouponCode());
+        return calculatePriceWithTax(priceWithDiscount, taxPercent);
     }
 
-    private Double calculatePrice(Double productPrice, Integer taxPercent, Integer discountPercent) {
-        final double priceWithDiscount = productPrice - discountPercent * productPrice / 100;
-        return Precision.round(priceWithDiscount + priceWithDiscount * taxPercent / 100, 3);
+    private Double calculatePriceWithDiscount(Double productPrice, String couponCode) {
+        if (couponCode == null) return productPrice;
+        return couponService.findByCode(couponCode).calculatePriceWithDiscount(productPrice);
+    }
+
+    private Double calculatePriceWithTax(Double price, Integer taxPercent) {
+        return Precision.round(price + price * taxPercent / 100, 3);
     }
 }
