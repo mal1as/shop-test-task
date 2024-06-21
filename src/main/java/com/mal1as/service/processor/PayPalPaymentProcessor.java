@@ -8,7 +8,7 @@ public class PayPalPaymentProcessor implements PaymentProcessor {
 
     @Override
     public void makePayment(double price) {
-        makePayment(Integer.valueOf((int) Math.floor(price)));
+        makePayment(Integer.valueOf((int) Math.ceil(price)));
     }
 
     private void makePayment(Integer price) {

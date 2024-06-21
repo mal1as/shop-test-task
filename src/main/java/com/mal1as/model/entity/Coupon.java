@@ -2,8 +2,8 @@ package com.mal1as.model.entity;
 
 import com.mal1as.model.enums.CouponType;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -11,6 +11,9 @@ import lombok.Setter;
 @Table(name = "coupon")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder
 public class Coupon {
 
     @Id

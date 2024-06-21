@@ -1,8 +1,11 @@
 package com.mal1as.model.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @DiscriminatorValue("FIXED")
@@ -10,6 +13,9 @@ import lombok.Setter;
 @Table(name = "coupon_fixed")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder
 public class CouponFixed extends Coupon {
 
     @OneToOne
