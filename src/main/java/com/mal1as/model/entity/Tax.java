@@ -18,6 +18,9 @@ public class Tax {
     @Column(name = "code_pattern")
     private String codePattern;
 
+    @Column(name = "country")
+    private String country;
+
     @Column(name = "percent")
     private Integer percent;
 }

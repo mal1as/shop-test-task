@@ -17,8 +17,8 @@ insert into coupon_percent values (1, 10),
 insert into coupon_fixed values (4, 50),
                                 (5, 100);
 
-insert into tax values (1, 'DE[0-9]{9}', 19),
-                       (2, 'IT[0-9]{11}', 22),
-                       (3, 'GR[0-9]{9}', 24),
-                       (4, 'FR[A-Z]{2}[0-9]{9}', 20);
+insert into tax values (1, 'DE[0-9]{9}', 'Germany', 19),
+                       (2, 'IT[0-9]{11}', 'Italy', 22),
+                       (3, 'GR[0-9]{9}', 'Greece', 24),
+                       (4, 'FR[A-Z]{2}[0-9]{9}', 'France', 20);
 SELECT setval('tax_id_seq', (SELECT max(id) FROM tax), true);
