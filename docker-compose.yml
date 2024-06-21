@@ -20,9 +20,9 @@ services:
       dockerfile: Dockerfile
     container_name: app
     expose:
-      - "8080"
+      - "8337"
     ports:
-      - "8080:8080"
+      - "8337:8337"
     networks:
       - postgres
     environment:
