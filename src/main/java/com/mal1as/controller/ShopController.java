@@ -5,6 +5,8 @@ import com.mal1as.model.dto.request.PurchaseRequest;
 import com.mal1as.model.dto.response.ErrorResponse;
 import com.mal1as.model.dto.response.PriceResponse;
 import com.mal1as.model.dto.response.SuccessResponse;
+import com.mal1as.service.PriceService;
+import com.mal1as.service.PurchaseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -20,6 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class ShopController {
 
+    private final PriceService priceService;
+    private final PurchaseService purchaseService;
+
     @Operation(
             summary = "Calculate price",
             description = "Calculate final price including tax and discount"
@@ -33,7 +38,11 @@ public class ShopController {
     )
     @PostMapping("/calculate-price")
     public ResponseEntity<SuccessResponse<PriceResponse>> calculatePrice(@RequestBody PriceRequest priceRequest) {
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(SuccessResponse.<PriceResponse>builder()
+                .content(PriceResponse.builder()
+                        .price(priceService.calculatePrice(priceRequest))
+                        .build())
+                .build());
     }
 
     @Operation(
@@ -49,6 +58,7 @@ public class ShopController {
     )
     @PostMapping("/purchase")
     public ResponseEntity<SuccessResponse<?>> makePurchase(@RequestBody PurchaseRequest purchaseRequest) {
-        return ResponseEntity.ok().build();
+        purchaseService.makePurchase(purchaseRequest);
+        return ResponseEntity.ok(SuccessResponse.builder().build());
     }
 }
