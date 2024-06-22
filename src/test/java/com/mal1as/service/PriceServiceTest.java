@@ -119,4 +119,26 @@ class PriceServiceTest {
                 .build();
         assertEquals(200, priceService.calculatePrice(request4));
     }
+
+    @Test
+    void calculatePriceWithRound() {
+        when(productService.findById(1L)).thenReturn(Product.builder().price(100.99).build());
+        when(taxService.findByNumber("GR123456789")).thenReturn(Tax.builder().percent(24).build());
+        when(couponService.findByCode("P33")).thenReturn(CouponPercent.builder().percent(33).build());
+        when(couponService.findByCode("P14")).thenReturn(CouponPercent.builder().percent(14).build());
+
+        final PriceRequest request1 = PriceRequest.builder()
+                .product(1L)
+                .taxNumber("GR123456789")
+                .couponCode("P33")
+                .build();
+        assertEquals(83.902, priceService.calculatePrice(request1));
+
+        final PriceRequest request2 = PriceRequest.builder()
+                .product(1L)
+                .taxNumber("GR123456789")
+                .couponCode("P14")
+                .build();
+        assertEquals(107.696, priceService.calculatePrice(request2));
+    }
 }
