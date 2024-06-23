@@ -32,9 +32,13 @@ public class ShopController {
     )
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Ok", content = {@Content(schema = @Schema(implementation = PriceResponse.class), mediaType = "application/json")}),
-                    @ApiResponse(responseCode = "400", description = "Bad request", content = {@Content(schema = @Schema(implementation = ErrorResponse.class), mediaType = "application/json")}),
-                    @ApiResponse(responseCode = "500", description = "Internal server error", content = {@Content(schema = @Schema(implementation = ErrorResponse.class), mediaType = "application/json")})
+                    @ApiResponse(responseCode = "200", description = "Ok", useReturnTypeSchema = true),
+                    @ApiResponse(responseCode = "400", description = "Bad request",
+                            content = {@Content(schema = @Schema(implementation = ErrorResponse.class),
+                                    mediaType = "application/json")}),
+                    @ApiResponse(responseCode = "500", description = "Internal server error",
+                            content = {@Content(schema = @Schema(implementation = ErrorResponse.class),
+                                    mediaType = "application/json")})
             }
     )
     @PostMapping("/calculate-price")
@@ -52,9 +56,13 @@ public class ShopController {
     )
     @ApiResponses(
             value = {
-                    @ApiResponse(responseCode = "200", description = "Ok", content = {@Content(schema = @Schema(implementation = SuccessResponse.class), mediaType = "application/json")}),
-                    @ApiResponse(responseCode = "400", description = "Bad request", content = {@Content(schema = @Schema(implementation = ErrorResponse.class), mediaType = "application/json")}),
-                    @ApiResponse(responseCode = "500", description = "Internal server error", content = {@Content(schema = @Schema(implementation = ErrorResponse.class), mediaType = "application/json")})
+                    @ApiResponse(responseCode = "200", description = "Ok", useReturnTypeSchema = true),
+                    @ApiResponse(responseCode = "400", description = "Bad request",
+                            content = {@Content(schema = @Schema(implementation = ErrorResponse.class),
+                                    mediaType = "application/json")}),
+                    @ApiResponse(responseCode = "500", description = "Internal server error",
+                            content = {@Content(schema = @Schema(implementation = ErrorResponse.class),
+                                    mediaType = "application/json")})
             }
     )
     @PostMapping("/purchase")
